@@ -6,7 +6,7 @@ export const LoadingWrapper = styled.div`
   align-items: center;
   height: 100vh;
   font-size: 1.5em;
-  color: #333;
+  color: ${props => props.theme.colors.textPrimary};
 `;
 
 export const Spinner = styled.div`

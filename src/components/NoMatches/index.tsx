@@ -1,15 +1,9 @@
 import React from 'react';
-import styled from 'styled-components';
 
-const NoMatchesWrapper = styled.div`
-  padding: 15px;
-  margin: 15px 0;
-  color: #555;
-  text-align: center;
-`;
+import * as Styled from './index.styles';
 
 const NoMatches: React.FC = () => (
-  <NoMatchesWrapper>No matches found for this address.</NoMatchesWrapper>
+  <Styled.NoMatchesWrapper>No matches found for this address.</Styled.NoMatchesWrapper>
 );
 
 export default NoMatches;

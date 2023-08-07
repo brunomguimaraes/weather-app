@@ -4,7 +4,6 @@ export const Container = styled.div`
   padding: 20px;
   background-color: ${props => props.theme.colors.secondary};
   border-radius: 5px;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
 `;
 
 export const ForecastDetails = styled.div`
@@ -33,7 +32,6 @@ export const ForecastItem = styled.li`
   padding: 10px;
   background-color: #fff;
   border-radius: 5px;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
 `;
 
 export const TimeOfDayForecast = styled.div`
