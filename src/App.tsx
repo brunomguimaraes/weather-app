@@ -2,15 +2,16 @@ import React, { useState } from "react";
 import { ThemeProvider } from "styled-components";
 
 import SearchBar from "./components/SearchBar";
+import Forecast from "./components/Forecast";
 
-import { fetchForecast } from './services/api/weatherService';
+import { fetchForecast, WeatherForecast } from './services/api/weatherService';
 import { GeocodingResponse, fetchCoordinates } from "./services/api/geocodingService";
 
 import GlobalStyles from "./styles/GlobalStyles";
 import theme from "./styles/theme";
 
 const App: React.FC = () => {
-  const [forecast, setForecast] = useState<any | null>(null);
+  const [forecast, setForecast] = useState<WeatherForecast | null>(null);
   
   const handleSearch = async (address: string) => {
 
@@ -36,6 +37,7 @@ const App: React.FC = () => {
     <ThemeProvider theme={theme}>
       <GlobalStyles />
       <SearchBar onSearch={handleSearch} />
+      {forecast && <Forecast data={forecast} />}
     </ThemeProvider>
   );
 };

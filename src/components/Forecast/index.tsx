@@ -1,29 +1,33 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 
-const Forecast: React.FC<{ lat: string; lon: string }> = ({ lat, lon }) => {
-  const [forecast, setForecast] = useState<any>(null);
+import { WeatherForecast } from '../../services/api/weatherService';
 
-  useEffect(() => {
-    const fetchWeather = async () => {
-      const endpoint = `https://api.weather.gov/points/${lat},${lon}/forecast`;
-      const response = await fetch(endpoint);
-      const data = await response.json();
-      setForecast(data.properties.periods);
-    };
+interface ForecastProps {
+  data: WeatherForecast;
+}
 
-    fetchWeather();
-  }, [lat, lon]);
+const Forecast: React.FC<ForecastProps> = ({ data }) => {
+  const { properties } = data;
+  const { periods } = properties;
 
   return (
-    <div>
-      {forecast ? forecast.map((day: any) => (
-        <div key={day.number}>
-          <h3>{day.name}</h3>
-          <p>{day.detailedForecast}</p>
-        </div>
-      )) : <p>Loading...</p>}
+    <div className="forecast-container">
+      <div className="forecast-details">
+        <h4>7-Day Forecast</h4>
+        <ul>
+          {periods.slice(0, 7).map(period => (
+            <li key={period.number}>
+              <h5>{period.name}</h5>
+              <img src={period.icon} alt={period.shortForecast} />
+              <p><strong>Temperature:</strong> {period.temperature} {period.temperatureUnit}</p>
+              <p><strong>Wind:</strong> {period.windSpeed} from the {period.windDirection}</p>
+              <p><strong>Forecast:</strong> {period.detailedForecast}</p>
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
-}
+};
 
 export default Forecast;
