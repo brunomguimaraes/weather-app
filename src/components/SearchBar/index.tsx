@@ -4,11 +4,15 @@ import useDebouncedFunction from '../../hooks/useDebouncedFunction';
 
 import * as Styled from './index.styles';
 
-const SearchBar: React.FC = () => {
+interface SearchBarProps {
+  onSearch: (term: string) => void;
+}
+
+const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
   const [searchTerm, setSearchTerm] = useState('');
 
   const handleSearch = () => {
-    console.log(`Searching for: ${searchTerm}`);
+    onSearch(searchTerm);
   };
 
   const debouncedSearch = useDebouncedFunction(handleSearch, 600);
@@ -17,7 +21,8 @@ const SearchBar: React.FC = () => {
     if (searchTerm) {
       debouncedSearch();
     }
-  }, [debouncedSearch, searchTerm]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [searchTerm]);
 
   return (
     <Styled.SearchWrapper>
@@ -29,5 +34,6 @@ const SearchBar: React.FC = () => {
     </Styled.SearchWrapper>
   );
 };
+
 
 export default SearchBar;
