@@ -3,6 +3,9 @@ import { ThemeProvider } from "styled-components";
 
 import SearchBar from "./components/SearchBar";
 import Forecast from "./components/Forecast";
+import ErrorHandler from "./components/ErrorHandler";
+import NoMatches from "./components/NoMatches";
+import Loading from "./components/Loading";
 
 import { fetchForecast, WeatherForecast } from './services/api/weatherService';
 import { GeocodingResponse, fetchCoordinates } from "./services/api/geocodingService";
@@ -12,24 +15,30 @@ import theme from "./styles/theme";
 
 const App: React.FC = () => {
   const [forecast, setForecast] = useState<WeatherForecast | null>(null);
-  
+  const [error, setError] = useState<string | null>(null);
+  const [noMatches, setNoMatches] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
+
   const handleSearch = async (address: string) => {
+    setError(null);
+    setNoMatches(false);
+    setLoading(true);
 
     try {
       const data: GeocodingResponse = await fetchCoordinates(address);
   
       if (data.result.addressMatches.length) {
         const { coordinates } = data.result.addressMatches[0];
-        console.log("Latitude:", coordinates.y, "Longitude:", coordinates.x);
-  
         const forecastData = await fetchForecast(coordinates.y, coordinates.x);
         setForecast(forecastData);
       } else {
-        console.log("No matches found for this address.");
+        setNoMatches(true);
+        setForecast(null);
       }
-  
     } catch (error) {
-      console.error("Error fetching address coordinates:", error);
+      setError("Error fetching address coordinates. Please try again later.");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -37,7 +46,10 @@ const App: React.FC = () => {
     <ThemeProvider theme={theme}>
       <GlobalStyles />
       <SearchBar onSearch={handleSearch} />
-      {forecast && <Forecast data={forecast} />}
+      {loading && <Loading />}
+      {error && <ErrorHandler message={error} />}
+      {noMatches && <NoMatches />}
+      {forecast && <Forecast forecastData={forecast} />}
     </ThemeProvider>
   );
 };

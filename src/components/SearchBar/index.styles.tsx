@@ -10,8 +10,8 @@ export const SearchWrapper = styled.div`
 export const SearchInput = styled.input`
   padding: 0.5rem 1rem;
   border: 2px solid #ccc;
-  border-radius: 50px;  // Gives a rounded effect
-  width: 250px;  // Adjust width as needed
+  border-radius: 50px;
+  width: 250px;
   font-size: 1rem;
   outline: none;
   transition: border-color 0.3s ease;

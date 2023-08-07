@@ -1,0 +1,59 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Forecast /> matches snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="sc-bcPKhP bBiCsn"
+  >
+    <div
+      class="sc-grXZZQ frLpQo"
+    >
+      <h4
+        class="sc-dkjKgF bVYCTf"
+      >
+        7-Day Forecast
+      </h4>
+      <ul
+        class="sc-hLclGa jvDsxC"
+      >
+        <li
+          class="sc-eDnVMP cJxIJa"
+        >
+          <h5>
+            Day 1
+          </h5>
+          <img
+            alt="Day 1"
+            class="sc-jSwlEQ kllzEk"
+            src="https://sample-icon-1.com"
+          />
+          <p
+            class="sc-gKHVLF fZILRc"
+          >
+            <strong>
+              Temperature:
+            </strong>
+             20 C
+          </p>
+          <p
+            class="sc-gKHVLF fZILRc"
+          >
+            <strong>
+              Wind:
+            </strong>
+             10 mph from the N
+          </p>
+          <p
+            class="sc-gKHVLF fZILRc"
+          >
+            <strong>
+              Forecast:
+            </strong>
+             Sunny with a slight chance of rain.
+          </p>
+        </li>
+      </ul>
+    </div>
+  </div>
+</DocumentFragment>
+`;

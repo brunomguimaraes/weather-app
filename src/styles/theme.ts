@@ -6,6 +6,7 @@ const theme = {
     secondary: "#464F51",
     background: "#000009",
     textPrimary: "#F7F4F3",
+    textSecondary: "#000009",
     error: "#D62839"
   }
 };

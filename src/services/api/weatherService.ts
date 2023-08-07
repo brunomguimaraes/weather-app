@@ -42,7 +42,6 @@ interface Period {
   isDaytime: boolean;
   temperature: number;
   temperatureUnit: string;
-  temperatureTrend: null; // Can be updated if other types are possible
   probabilityOfPrecipitation?: ProbabilityOfPrecipitation;
   dewpoint: Dewpoint;
   relativeHumidity: RelativeHumidity;
@@ -102,10 +101,8 @@ export const fetchForecast = async (latitude: number, longitude: number): Promis
 
     const initialData: any = await initialResponse.json();
 
-    // Now fetch the detailed forecast using the forecast link in the initial data
     const detailedForecast = await fetchDetailedForecast(initialData.properties.forecast);
 
-    // You can either return the detailed forecast alone or combine both data sets depending on your need
     return detailedForecast;
 
   } catch (error) {
